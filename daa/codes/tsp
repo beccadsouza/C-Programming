@@ -1,0 +1,41 @@
+#include <stdio.h>
+
+int a[10][10],n,src=3,visited[10],cost=0;
+
+int least(int c){
+    int min=999,kmin=0,nc=999;
+    for(int i = 0;i<n;i++){
+        if(a[c][i]!=0 && visited[i]==0){
+            if(a[c][i]+a[i][c]<min){
+                nc = i;
+                min = a[i][src]+a[c][i];
+                kmin = a[c][i];
+            }
+        }
+    }
+    if(min!=999)
+        cost += kmin;
+    return nc;
+}
+
+void mincost(int city){
+    visited[city] =1;
+    int ncity = least(city);
+    printf("%d ->",city+1);
+    if(ncity==999){
+        ncity = src;
+        printf("%d",ncity+1);
+        cost += a[city][ncity];
+        return;
+    }
+    mincost(ncity);
+}
+
+void main(){
+    scanf("%d",&n);
+    for(int i = 0;i<n;i++)
+        for(int j = 0;j<n;j++)
+            scanf("%d",&a[i][j]);
+    mincost(src);
+    printf("\nCOST : %d",cost);
+}

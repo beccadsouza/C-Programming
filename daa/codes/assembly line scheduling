@@ -1,0 +1,52 @@
+#include<stdio.h>
+#define no_station 4
+#define no_lines 2
+
+typedef struct station{
+    int from;
+    int cost;
+}station;
+
+void main(){
+    int line;
+    int cost[no_lines][no_station] = {{4,5,3,2},{2,10,1,4}};
+    int transcost[no_lines][no_station] = {{0,7,4,5},{0,9,2,8}};
+    int entry[no_lines] = {10,12};
+    int exit[no_lines] = {18,7};
+    station f[no_lines][no_station];
+    for(int i = 0;i<2;i++)
+        for(int j = 0;j<4;j++)
+            f[i][j].cost=f[i][j].from =0;
+
+    for(int i = 0;i<no_lines;i++) {
+        f[i][0].cost = entry[i] + cost[i][0];
+        f[i][0].from = i;
+    }
+    for(int i = 1;i<no_station;i++){
+        for(int j = 0;j<no_lines;j++){
+            int k = 1-j;
+            int nontransferred = cost[j][i] + f[j][i-1].cost;
+            int transferred = cost[j][i] + f[k][i-1].cost + transcost[k][i];
+            if(transferred>nontransferred){
+                f[j][i].cost = nontransferred;
+                f[j][i].from = j;
+            }
+            else{
+                f[j][i].cost = transferred;
+                f[j][i].from = k;
+            }
+        }
+    }
+    for(int i = 0;i<no_lines;i++){
+        for(int j = 0;j<no_station;j++)
+            printf("%d [%d]-->",f[i][j].cost,f[i][j].from+1);
+        printf("%d\n",f[i][no_station-1].cost+exit[i]);
+    }
+    if(f[0][no_station-1].cost+exit[0]<f[1][no_station-1].cost+exit[1])
+        line = 0;
+    else line = 1;
+    for(int i = 0;i<no_station;i++)
+        printf("Station %d of line %d -> ",i+1,f[line][i].from+1);
+    printf("Finish");
+    printf("\nCost : %d",f[line][no_station-1].cost+exit[line]);
+}

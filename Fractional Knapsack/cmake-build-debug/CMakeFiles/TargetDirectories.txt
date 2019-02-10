@@ -1,0 +1,3 @@
+C:/Users/Dell/CLionProjects/Fractional Knapsack/cmake-build-debug/CMakeFiles/Fractional_Knapsack.dir
+C:/Users/Dell/CLionProjects/Fractional Knapsack/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dell/CLionProjects/Fractional Knapsack/cmake-build-debug/CMakeFiles/rebuild_cache.dir

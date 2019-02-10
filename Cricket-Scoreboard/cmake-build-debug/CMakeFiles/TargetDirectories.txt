@@ -1,0 +1,3 @@
+C:/Users/Dell/CLionProjects/Cricket-Scoreboard/cmake-build-debug/CMakeFiles/Cricket_Scoreboard.dir
+C:/Users/Dell/CLionProjects/Cricket-Scoreboard/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dell/CLionProjects/Cricket-Scoreboard/cmake-build-debug/CMakeFiles/rebuild_cache.dir

@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include <string.h>
+void main() {
+    char text[50], pattern[10];
+    scanf("%s%s", text, pattern);
+    int f[strlen(pattern)];
+    int i = 1,j=0;
+    f[0] =0;
+    while(i<strlen(pattern)){
+        if(pattern[i]==pattern[j]){
+            f[i] = j+1;
+            i++,j++;
+        }
+        else if(j>0)
+            j = f[j-1];
+        else {
+            f[i] = 0;
+            i++;
+        }
+    }
+    i = 0,j=0;
+    while(i<strlen(text)){
+        if(pattern[j]==text[i]){
+            if(j==strlen(pattern)-1)
+                printf("index %d",i+1);
+            i++;
+            j++;
+        }
+        else if(j>0)
+            j = f[j-1];
+        else i++;
+    }
+}

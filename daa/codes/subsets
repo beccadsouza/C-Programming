@@ -1,0 +1,35 @@
+#include <stdio.h>
+int a[100],w[100],d,n;
+void print(){
+    for(int i = 0;i<n;i++)
+        if(a[i]==1)
+            printf("%d ",w[i]);
+    printf("\n");
+}
+void sumOfSubsets(int sum, int index, int totalsum){
+    a[index] = 1;
+    if(sum+w[index]==d){
+        int temp = index;
+        while(temp++<n)
+            a[temp] =0;
+        print();
+    }
+    else if (sum+w[index]+w[index+1]<=d){
+        sumOfSubsets(sum+w[index],index+1,totalsum-w[index]);
+    }
+
+    if(sum+totalsum-w[index]>=d && sum+w[index+1]<=d){
+        a[index] = 0;
+        sumOfSubsets(sum,index+1,totalsum-w[index]);
+    }
+}
+void main(){
+    scanf("%d",&n);
+    for(int i = 0;i<n;i++)
+        scanf("%d",&w[i]);
+    scanf("%d",&d);
+    int max =0;
+    for(int i = 0;i<n;i++)
+        max += w[i];
+    sumOfSubsets(0,0,max);
+}

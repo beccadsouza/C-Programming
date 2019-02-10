@@ -1,0 +1,113 @@
+#include<stdio.h>
+#include<stdbool.h>
+
+void main() {
+
+    int n, u, v, w, e, src, min, node=0;
+    printf("Enter number of vertices and number of edges : ");
+    scanf("%d%d", &n, &e);
+
+    int adj[n][n],visited[n], preD[n], distance[n];
+
+    printf("\nEnter source index : ");
+    scanf("%d",&src);
+
+    for (int i = 0; i < n; i++)
+        for (int j = 0; j < n; j++)
+            adj[i][j] = 10000;
+
+    printf("\nEnter the edges : ");
+
+    for (int i = 0; i < e; i++) {
+        scanf("%d%d%d", &u, &v, &w);
+        if (u != v)
+            adj[u][v] = adj[v][u] = w;
+    }
+
+    for (int i = 0; i < n; i++){
+        for (int j = 0; j < n; j++)
+            printf("%d   ",adj[i][j]);
+        printf("\n");
+    }
+
+
+
+    for (int i = 0; i < n; i++){
+        visited[i] = 0;
+        preD[i] = src;
+    }
+
+    for(int i = 0;i<n;i++)
+        distance[i] = adj[src][i];
+
+    visited[src] = 1;
+    distance[src] = 0;
+
+    printf("Distance array ");
+    for(int i = 0;i<n;i++)
+        printf("%d  ",distance[i]);
+    printf("\n");
+
+
+    for(int i = 0;i<n;i++){
+        min = 10000;
+
+        for(int j = 0;j<n;j++)
+            if(visited[j]!=1 && min>distance[j]){
+                min = distance[j];
+                node = j;
+            }
+
+        visited[node] = 1;
+
+        for(int k = 0;k<n;k++){
+            if(min+adj[node][k]<distance[k] && visited[k]!=1){
+                distance[k] = min+adj[node][k];
+                preD[k] = node;
+            }
+        }
+
+        printf("Distance array ");
+        for(int d = 0;d<n;d++)
+            printf("%d  ",distance[d]);
+        printf("\n");
+
+    }
+    for(int i = 0;i<n;i++){
+        printf("%d <- ",i);
+        int temp = i;
+        do{
+            printf("%d <- ",preD[temp]);
+            temp = preD[temp];
+        }
+        while(temp!=src);
+        printf("\n\n");
+    }
+}
+
+0 2 5 8 0 0
+2 0 2 0 0 6
+5 2 0 4 1 0
+8 0 4 0 7 0
+0 0 1 7 0 4
+0 6 0 0 4 0
+
+1 0 2
+2 0 5
+2 1 2
+3 0 8
+3 2 4
+4 2 1
+4 3 7
+5 1 6
+5 4 4
+
+2 1 2
+3 1 5
+3 2 2
+4 1 8
+4 3 4
+5 3 1
+5 4 7
+6 2 6
+6 5 5

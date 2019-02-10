@@ -1,0 +1,3 @@
+C:/Users/Dell/CLionProjects/GreedyGraphs/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/Dell/CLionProjects/GreedyGraphs/cmake-build-debug/CMakeFiles/GreedyGraphs.dir
+C:/Users/Dell/CLionProjects/GreedyGraphs/cmake-build-debug/CMakeFiles/rebuild_cache.dir
